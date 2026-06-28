@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Priyanka 💌</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #1e293b;
+      color: white;
+      overflow: hidden;
+    }
+
+    .page {
+      display: none;
+      height: 100vh;
+      padding: 20px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .page.active {
+      display: flex;
+      animation: fade 0.5s ease;
+    }
+
+    .card {
+      position: relative;
+      z-index: 2;
+      width: 92%;
+      max-width: 850px;
+      max-height: 92vh;
+      overflow: auto;
+      text-align: center;
+      padding: 32px;
+      border-radius: 24px;
+      background: rgba(51, 65, 85, 0.9);
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+    }
+
+    h1 {
+      margin-top: 0;
+    }
+
+    p {
+      line-height: 1.6;
+    }
+
+    button {
+      border: 0;
+      border-radius: 28px;
+      padding: 12px 22px;
+      margin: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(244, 114, 182, 0.3);
+    }
+
+    .primary {
+      background: white;
+      color: #1e293b;
+    }
+
+    .option {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .option.active {
+      background: rgba(244, 114, 182, 0.35);
+      border-color: #f472b6;
+    }
+
+    .box {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 16px;
+      margin: 16px auto;
+      max-width: 700px;
+      line-height: 1.6;
+    }
+
+    .comic-strip {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 20px 10px;
+      margin: 16px auto;
+      max-width: 700px;
+      border: 2px dashed rgba(244, 114, 182, 0.3);
+    }
+
+    .comic-panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .comic-emoji {
+      font-size: 55px;
+      line-height: 1.2;
+      display: block;
+    }
+
+    .comic-action {
+      font-size: 30px;
+      display: block;
+      letter-spacing: 8px;
+      padding: 4px 0;
+    }
+
+    .comic-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+      margin: 10px 0;
+    }
+
+    .comic-panel .label {
+      font-size: 13px;
+      opacity: 0.6;
+      letter-spacing: 2px;
+      font-weight: 300;
+    }
+
+    @keyframes pulseGlow {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.7;
+        transform: scale(1.05);
+      }
+    }
+
+    .silent-message {
+      font-size: 42px;
+      letter-spacing: 4px;
+      padding: 10px;
+      background: rgba(244, 114, 182, 0.1);
+      border-radius: 30px;
+      border: 1px solid rgba(244, 114, 182, 0.2);
+    }
+
+    .action-line {
+      font-size: 28px;
+      letter-spacing: 12px;
+      color: #fbbf9b;
+    }
+
+    input {
+      width: min(420px, 90%);
+      padding: 14px 20px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 28px;
+      text-align: center;
+      font-size: 16px;
+      background: rgba(255, 255, 255, 0.05);
+      color: white;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      border-color: #f472b6;
+      background: rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 20px rgba(244, 114, 182, 0.2);
+    }
+
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .float {
+      position: fixed;
+      top: -15vh;
+      pointer-events: none;
+      z-index: 3;
+      animation: fall linear infinite;
+      text-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      max-width: 650px;
+      margin: 18px auto;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin: 20px auto;
+    }
+
+    .step {
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+    }
+
+    .stepIcon {
+      font-size: 30px;
+    }
+
+    .stepLabel {
+      font-size: 15px;
+      line-height: 1.25;
+    }
+
+    .step.done {
+      background: rgba(244, 114, 182, 0.35);
+      border-color: #f472b6;
+    }
+
+    .gameBox {
+      position: relative;
+      height: 220px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.08);
+      margin: 18px auto;
+      overflow: hidden;
+    }
+
+    .note {
+      position: absolute;
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      font-size: 30px;
+      border: none;
+      background: rgba(244, 114, 182, 0.3);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .note:hover {
+      transform: scale(1.2);
+      box-shadow: 0 0 30px rgba(244, 114, 182, 0.5);
+    }
+
+    .heartBox {
+      margin: 20px auto;
+    }
+
+    .bigHeart {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      font-size: 62px;
+      background: rgba(255, 255, 255, 0.12);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      animation: heartbeat 1.4s infinite;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .heartMeter {
+      width: min(420px, 90%);
+      height: 12px;
+      margin: 18px auto;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.15);
+      overflow: hidden;
+    }
+
+    .heartFill {
+      width: 0%;
+      height: 100%;
+      background: #f472b6;
+      transition: width 0.2s;
+    }
+
+    .letter {
+      text-align: left;
+      max-height: 45vh;
+      overflow: auto;
+    }
+
+    .bloomGarden {
+      position: relative;
+      height: 120px;
+      overflow: hidden;
+    }
+
+    .bloom {
+      position: absolute;
+      bottom: -20px;
+      animation: bloom 1.8s forwards;
+    }
+
+    .locked {
+      opacity: 0.45;
+      pointer-events: none;
+    }
+
+    .rain-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .raindrop {
+      position: absolute;
+      font-size: 20px;
+      animation: rainFall linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes rainFall {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .rain-button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 15px 30px;
+      border-radius: 30px;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .rain-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 40px rgba(102, 126, 234, 0.5);
+    }
+
+    @keyframes emojiFall {
+      0% {
+        transform: translateY(-20px) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fade {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(130vh) rotate(35deg);
+      }
+    }
+
+    @keyframes heartbeat {
+      0% {
+        transform: scale(1);
+      }
+
+      20% {
+        transform: scale(1.08);
+      }
+
+      40% {
+        transform: scale(1);
+      }
+
+      60% {
+        transform: scale(1.12);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes bloom {
+      from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.6);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(-45px) scale(1);
+      }
+    }
+
+    @media(max-width: 700px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .comic-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .card {
+        padding: 24px;
+      }
+
+      .comic-emoji {
+        font-size: 40px;
+      }
+
+      .comic-panel .big-emoji {
+        font-size: 50px;
+      }
+
+      .silent-message {
+        font-size: 30px;
+      }
+
+      input {
+        font-size: 14px;
+        padding: 12px 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <div class="rain-container" id="rainContainer"></div>
+
+  <script>
+    let defaultName = "Priyanka";
+
+    const texts = {
+      intro: "Website band karaycha... adhi mala thoda time de.",
+      hello: "Heh mi fakt tuja sathi banavley.",
+      apology: "Kharach sorry tula hurt kela tyamule. mih kahi excuses nahi banvyche aahet. Mala kahi pan bolaycha adhi samjun ghetle pajey hote, ajjun patience ni aaikla pajey hote, ani mala maje words pan carefully bolayla pajey.",
+      meaning: "Tu na khup mast aahes. tuja time, tuje words, ani tuji friendship kharach khup mast aahet. Maja chuki mule asa nko samjus ki mala kahi vatach nahi.",
+      promise: "Mih Promise karto tuja aaikachi thoda thoda, ani niragas pani bolaychi, tuja feelings chi importnace thevun bolaychi. Mih tuja trust slowly earn karin ani nehmi heh lakshat ghein ki tu comfortable ashil maja sobat.",
+      paniPuri: "Jar Sorry pani puri madhe paid karayche aste tar , mih tula lifetime sathi roj detach rahilo asto khayla.",
+      teddy: "Bagh toh teddy shant aahe karan tu ragavli aahes. Please mala maaf kar magh toh teddy pan khush hoil.",
+      heartbeat: "Heart la Hold kar thoda vel . ha maja way aahe sangaycha ki tuje pan feelings matter kartat.",
+      heartbeatDone: "Thank you hold kela padal. Ani mih promise tar nahi pan purna try karar neat bolayche.",
+      finalThanks: "Thank you sandhi sathi ."
+    };
+
+    const journeyMessages = [
+      "mih manya karto ki maji chuki aahe.",
+      "sorry jara maja mule tula dukh zala manun.",
+      "sorry ya sagla excuses sathi.",
+      "mih overthinking karayche band karayla try karin.",
+      "Tula bolayche asel tevha bolu."
+    ];
+
+    const jarNotes = [
+      "🌸 tu kiti mast aahes.",
+      "🧸 mala avdte tu kiti mast peni aaiktes pan nehmi nahi aaikat.",
+      "💌 yevda patience pan aahe.",
+      "✨ kharch mast aahes tu."
+    ];
+
+    const sorryNotes = [
+      "kharach parat parat sorry maja mule dukhi zali manun.",
+      "Mih visarto ki mala samorcha pesron cha pan vichar karun bolayla pajey.",
+      "Mala jar samjun ghetle pajey.",
+      "bagh mih tula force nahi karnar mala maaf karayla.",
+      "Mih try try try try karin thoda thoda."
+    ];
+
+    const moodMessages = [
+      "mih samjuu shakto.",
+      "chalel mih thambin aajun.",
+      "I am sorry for maja mule tu dukhi zalis.",
+      "Thank you. mih aata parat dukhi karayche try nahi karnar."
+    ];
+
+    const replyMessages = [
+      "Samju shakto thike mih nahi bhandan karnar.",
+      "Thank you tu yevde vachle manun.",
+      "Mih shant pani aaikat jayin.",
+      "Thike chalel mih thambin."
+    ];
+
+    let current = 0;
+    let nameValue = defaultName;
+    let noteCount = 0;
+    let stepCount = 0;
+    let heartPower = 0;
+    let heartTimer = null;
+    let bloomed = false;
+    let isRaining = false;
+
+    const app = document.getElementById("app");
+    const rainContainer = document.getElementById("rainContainer");
+
+    function select(button) {
+      const group = button.parentElement.querySelectorAll(".option");
+      group.forEach(b => b.classList.remove("active"));
+      button.classList.add("active");
+    }
+
+    function toggleRain() {
+      if (isRaining) {
+        stopRain();
+      } else {
+        startRain();
+      }
+    }
+
+    function startRain() {
+      if (isRaining) return;
+      isRaining = true;
+      if (!rainContainer) return;
+
+      rainContainer.innerHTML = '';
+      const emojis = ['💧', '🌧️', '✨', '💙', '💜', '💦', '🌈'];
+
+      for (let i = 0; i < 80; i++) {
+        const drop = document.createElement('div');
+        drop.className = 'raindrop';
+        drop.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        drop.style.left = Math.random() * 100 + '%';
+        drop.style.animationDuration = 1.5 + Math.random() * 3.5 + 's';
+        drop.style.animationDelay = Math.random() * 5 + 's';
+        drop.style.fontSize = 16 + Math.random() * 20 + 'px';
+        drop.style.opacity = 0.4 + Math.random() * 0.6;
+        rainContainer.appendChild(drop);
+      }
+
+      updateRainButtons();
+    }
+
+    function startEmojiRain() {
+      const emojiRain = ['💖', '🌸', '🧸', '✨', '💌', '💕'];
+      document.querySelectorAll('.page.active .card').forEach(card => {
+        let layer = card.querySelector('.emoji-layer');
+        if (!layer) {
+          layer = document.createElement('div');
+          layer.className = 'emoji-layer';
+          layer.style.position = 'absolute';
+          layer.style.inset = '0';
+          layer.style.pointerEvents = 'none';
+          layer.style.overflow = 'hidden';
+          card.style.position = 'relative';
+          card.appendChild(layer);
+          for (let i = 0; i < 18; i++) {
+            const e = document.createElement('div');
+            e.className = 'float';
+            e.textContent = emojiRain[Math.floor(Math.random() * emojiRain.length)];
+            e.style.left = Math.random() * 100 + '%';
+            e.style.animationDuration = 4 + Math.random() * 4 + 's';
+            e.style.animationDelay = Math.random() * 2 + 's';
+            e.style.fontSize = 18 + Math.random() * 18 + 'px';
+            layer.appendChild(e);
+          }
+        }
+      });
+    }
+
+    function stopRain() {
+      isRaining = false;
+      if (rainContainer) {
+        rainContainer.innerHTML = '';
+      }
+      updateRainButtons();
+    }
+
+    function updateRainButtons() {
+      document.querySelectorAll('.rain-button').forEach(btn => {
+        btn.textContent = isRaining ? '🌧️ Stop Rain' : '🌧️ Make It Rain';
+      });
+    }
+
+    const pages = [
+      introPage,
+      namePage,
+      helloPage,
+      apologyPage,
+      comicFallPage,
+      journeyPage,
+      funPage,
+      memoryJarPage,
+      promisePage,
+      heartbeatPage,
+      moodPage,
+      sorryGamePage,
+      angerPage,
+      finalChoicePage,
+      finalLetterPage
+    ];
+
+    function render() {
+      app.innerHTML = pages.map(function(page, index) {
+        return `
+          <section class="page ${index === current ? "active" : ""}">
+            ${page()}
+          </section>
+        `;
+      }).join("");
+
+      startEmojiRain();
+
+      if (current === 11) {
+        moveNote();
+      }
+      if (current === 12) {
+        updateAnger();
+      }
+
+      updateRainButtons();
+    }
+
+    function next() { if (current < pages.length - 1) { current++; render(); if (current === 4 && !isRaining) { startRain(); } if (current === pages.length - 1) { stopRain(); } } }
+    function introPage() { return `<div class="card"><h1>💌 For ${defaultName}</h1><p>${texts.intro}</p><button class="primary" onclick="next()">Open Letter</button><br><br><button class="rain-button" onclick="toggleRain()">🌧️ Make It Rain</button></div>`; }
+    function namePage() { return `<div class="card"><h1>💭 Name</h1><input id="readerName" placeholder="Type name here" autocomplete="off"><br><button class="primary" onclick="saveName()">Continue</button></div>`; }
+    function saveName() { let input = document.getElementById("readerName").value.trim(); nameValue = input || defaultName; next(); }
+    function helloPage() { return `<div class="card"><h1>Hi ${nameValue} ❤️</h1><p>${texts.hello}</p><button class="primary" onclick="next()">Next</button></div>`; }
+    function apologyPage() { return `<div class="card"><h1>💌 My Apology</h1><div class="box">${nameValue}, ${texts.apology}</div><div class="box">${texts.meaning}</div><button class="primary" onclick="next()">Next</button></div>`; }
+    function comicFallPage() { return `<div class="card"><h1>🎬 Yesterday's Adventure</h1><p style="opacity:0.7; font-size:14px; letter-spacing:2px;">✦ a silent story ✦</p><div class="comic-strip"><div class="comic-grid"><div class="comic-panel"><span class="comic-emoji">👩🧹</span><span class="comic-action">💧💧💧</span><span class="label">✦ ✦ ✦</span></div><div class="comic-panel"><span class="comic-emoji">✨🌊✨</span><span class="comic-action">🪞💦</span><span class="label">✦ ✦ ✦</span></div><div class="comic-panel"><span class="comic-emoji">🚶‍♀️</span><span class="comic-action">🎵😊🎵</span><span class="label">✦ ✦ ✦</span></div></div><div style="display:flex; justify-content:center; align-items:center; gap:10px; padding:6px 0; background:rgba(255,200,200,0.08); border-radius:20px; margin:6px 0;"><span style="font-size:45px;">👣</span><span style="font-size:35px;">➡️</span><span style="font-size:50px; animation: pulseGlow 1.2s infinite;">🫨</span><span style="font-size:35px;">➡️</span><span style="font-size:50px; animation: pulseGlow 0.8s infinite;">💫</span></div><div class="comic-grid"><div class="comic-panel" style="border-color: rgba(244,114,182,0.15);"><span class="comic-emoji">😮</span><span class="comic-action">🌀⬇️</span><span class="label">✦ ✦ ✦</span></div><div class="comic-panel" style="border-color: rgba(244,114,182,0.25);"><span class="comic-emoji">🤸‍♀️💥</span><span class="comic-action">💫🌊</span><span class="label">✦ ✦ ✦</span></div><div class="comic-panel" style="border-color: rgba(244,114,182,0.15);"><span class="comic-emoji">😅</span><span class="comic-action">🧊🩹</span><span class="label">✦ ✦ ✦</span></div></div><div class="silent-message" style="margin-top:12px;">🫂 💕 🧸 ☕ 🍪</div><div class="action-line">⭐ 💖 ⭐</div><div style="margin-top:12px; font-size:30px; letter-spacing:12px;">🌸 🌷 🌸</div></div><button class="primary" onclick="next()">Next ➜</button><button class="rain-button" onclick="toggleRain()">🌧️ Make It Rain</button></div>`; }
+    function journeyPage() { return `<div class="card"><h1>🛤️ Journey Of Sorry</h1><p>Tap each step. Forgiveness is not a button, but honesty can be a beginning.</p><div class="steps"><button class="option step" onclick="lightStep(this, 0)"><span class="stepIcon">😔</span><span class="stepLabel">I made a mistake</span></button><button class="option step" onclick="lightStep(this, 1)"><span class="stepIcon">💬</span><span class="stepLabel">I understand your feelings</span></button><button class="option step" onclick="lightStep(this, 2)"><span class="stepIcon">💌</span><span class="stepLabel">I am sorry</span></button><button class="option step" onclick="lightStep(this, 3)"><span class="stepIcon">🌱</span><span class="stepLabel">I will change</span></button><button class="option step" onclick="lightStep(this, 4)"><span class="stepIcon">⏳</span><span class="stepLabel">I will wait</span></button></div><div class="box" id="journeyMsg">Start with any step.</div><button id="journeyNext" class="primary locked" onclick="next()">Next</button></div>`; }
+    function lightStep(button, index) { if (button.classList.contains("done")) return; button.classList.add("done"); stepCount++; document.getElementById("journeyMsg").innerText = journeyMessages[index]; if (stepCount >= 5) { document.getElementById("journeyMsg").innerText = "I know forgiveness takes time. I just wanted to start with honesty."; document.getElementById("journeyNext").classList.remove("locked"); } }
+    function funPage() { return `<div class="card"><h1>😋 Pani Puri + Teddy</h1><div style="font-size:80px">🥙 🧸</div><p>${texts.paniPuri}</p><p>Dear ${nameValue},<br>${texts.teddy}</p><button class="primary" onclick="next()">Next</button></div>`; }
+    function memoryJarPage() { return `<div class="card"><h1>🏺 Kahi Nahi asach</h1><p>Tiny cute things I value about you.</p><div class="grid"><button class="option" onclick="showJar(0, this)">🌸 Note 1</button><button class="option" onclick="showJar(1, this)">🧸 Note 2</button><button class="option" onclick="showJar(2, this)">💌 Note 3</button><button class="option" onclick="showJar(3, this)">✨ Note 4</button></div><div class="box" id="jarText">Open a cute note.</div><button class="primary" onclick="next()">Next</button></div>`; }
+    function showJar(index, button) { button.classList.add("active"); document.getElementById("jarText").innerText = jarNotes[index]; }
+    function promisePage() { return `<div class="card"><h1>💕 My Promise</h1><div class="box">${texts.promise}</div><button class="primary" onclick="next()">Next</button></div>`; }
+    function heartbeatPage() { return `<div class="card"><h1>💗 Heart Moment</h1><p>${texts.heartbeat}</p><div class="heartBox"><button class="bigHeart" onmousedown="startHeart()" onmouseup="stopHeart()" onmouseleave="stopHeart()" ontouchstart="startHeart(); return false;" ontouchend="stopHeart()">❤️</button></div><div class="heartMeter"><div class="heartFill" id="heartFill"></div></div><div class="box" id="heartText">Hold the heart.</div><button id="heartNext" class="primary locked" onclick="next()">Next</button></div>`; }
+    function startHeart() { if (heartTimer) return; heartTimer = setInterval(function() { heartPower += 4; if (heartPower > 100) heartPower = 100; document.getElementById("heartFill").style.width = heartPower + "%"; if (heartPower >= 100) { stopHeart(); document.getElementById("heartText").innerText = texts.heartbeatDone; document.getElementById("heartNext").classList.remove("locked"); } }, 100); }
+    function stopHeart() { clearInterval(heartTimer); heartTimer = null; }
+    function moodPage() { return `<div class="card"><h1>💭 How Are You Feeling?</h1><p>Choose the mood that feels closest. I will not argue with it.</p><div class="grid"><button class="option" onclick="chooseMood(0, this)">Still angry</button><button class="option" onclick="chooseMood(1, this)">Confused</button><button class="option" onclick="chooseMood(2, this)">Sad</button><button class="option" onclick="chooseMood(3, this)">Softening</button></div><div class="box" id="moodText">Your feeling is valid.</div><button id="moodNext" class="primary locked" onclick="next()">Next</button></div>`; }
+    function chooseMood(index, button) { select(button); document.getElementById("moodText").innerText = moodMessages[index]; document.getElementById("moodNext").classList.remove("locked"); }
+    function sorryGamePage() { return `<div class="card"><h1>🎮 Sorry Notes Game</h1><p>Tap the floating note 5 times.</p><div class="gameBox"><button class="note" id="noteBtn" onclick="catchNote()">💌</button></div><p>Notes found: <span id="noteCount">0</span>/5</p><div id="noteList" class="box"></div><button id="gameNext" class="primary locked" onclick="next()">Next</button></div>`; }
+    function catchNote() { if (noteCount >= 5) return; document.getElementById("noteList").innerHTML += `<p>${sorryNotes[noteCount]}</p>`; noteCount++; document.getElementById("noteCount").innerText = noteCount; if (noteCount >= 5) { document.getElementById("gameNext").classList.remove("locked"); document.getElementById("noteBtn").innerText = "💖"; } else { moveNote(); } }
+    function moveNote() { let note = document.getElementById("noteBtn"); if (!note) return; note.style.left = Math.random() * 75 + "%"; note.style.top = Math.random() * 60 + "%"; }
+    function angerPage() { return `<div class="card"><h1>😐 Angry Meter</h1><p>Show me how angry you are. I will accept it.</p><div class="box"><div id="angerFace" style="font-size:70px">😊</div><p id="angerText">A little happy. I hope I can keep it this way.</p><input type="range" min="0" max="100" value="15" oninput="updateAnger()" id="angerRange" style="width:80%;padding:0;background:transparent;"></div><button class="primary" onclick="next()">Next</button></div>`; }
+    function updateAnger() { let range = document.getElementById("angerRange"); if (!range) return; let value = parseInt(range.value); let face = document.getElementById("angerFace"); let text = document.getElementById("angerText"); if (value < 25) { face.innerText = "😊"; text.innerText = "A little happy. I hope I can keep it this way."; } else if (value < 50) { face.innerText = "😕"; text.innerText = "A little upset. I understand."; } else if (value < 75) { face.innerText = "😔"; text.innerText = "Really upset. I am sorry."; } else { face.innerText = "😡"; text.innerText = "Very angry. I will give you space and not force you."; } }
+    function finalChoicePage() { return `<div class="card"><h1>💬 Your Choice</h1><p>You can choose any answer. I will respect it.</p><div class="grid"><button class="option" onclick="chooseReply(0, this)">I need space</button><button class="option" onclick="chooseReply(1, this)">I read it</button><button class="option" onclick="chooseReply(2, this)">Talk to me</button><button class="option" onclick="chooseReply(3, this)">Not ready yet</button></div><div class="box" id="replyText">Whatever you choose, I will respect your feelings.</div><button id="replyNext" class="primary locked" onclick="next()">Read Full Letter</button></div>`; }
+    function chooseReply(index, button) { select(button); document.getElementById("replyText").innerText = replyMessages[index]; document.getElementById("replyNext").classList.remove("locked"); }
+    function finalLetterPage() { return `<div class="card"><h1>💌 Full Letter</h1><div class="box letter"><p>Dear ${nameValue},</p><p>ata tula knatala nahi yet Kay sarkha sarkha sorry sorry aaikun tula pan maja yete vaat . Thike thike tasa Nasel ha maja pov aahe pan kay karu change pan nahi hot nhemi asach rahto . Pan mih try karin overthinking kami karyachi Ani Kami Kami bolayche eektar tula question pan mich karto ani answer pan mich deto mala Kay smajatch nahi . Ashe karto nehmi aani magh tu by by karat baste kay smajavat pan nahis . Aata baghu</p><p>दर्शन</p></div><p>Press Spacebar or click Bloom.</p><button class="primary" onclick="celebrate()">Bloom 🌸</button><div class="bloomGarden" id="garden"></div><h3 id="finalMsg"></h3></div>`; }
+    function celebrate() { if (bloomed) return; bloomed = true; const garden = document.getElementById("garden"); const flowers = ["🌸", "🌷", "💮", "🌺", "🌼", "✨"]; for (let i = 0; i < 20; i++) { const bloom = document.createElement("span"); bloom.className = "bloom"; bloom.textContent = flowers[Math.floor(Math.random() * flowers.length)]; bloom.style.left = Math.random() * 90 + "%"; bloom.style.fontSize = 24 + Math.random() * 28 + "px"; bloom.style.animationDelay = Math.random() * 0.5 + "s"; garden.appendChild(bloom); } document.getElementById("finalMsg").innerText = texts.finalThanks; }
+
+    document.addEventListener("keydown", function(e) {
+      if (current === pages.length - 1 && e.code === "Space") {
+        celebrate();
+      }
+    });
+
+    render();
+  </script>
+</body>
+
+</html>
